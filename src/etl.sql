@@ -98,3 +98,4 @@ on staging."location" = o.office_name
 join contracts as c
 on staging.emp_id = c.employee_id
 
+-- TODO: handle duplicate due to old contracts
