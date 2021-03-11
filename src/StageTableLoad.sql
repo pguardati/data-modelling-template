@@ -1,24 +1,28 @@
-drop table if exists proj_stg;
+DROP TABLE IF EXISTS proj_stg;
 
-create table proj_stg (
-	Emp_ID varchar(8),
-	Emp_NM varchar(50),
-	Email varchar(100),
-	hire_dt date,
+CREATE TABLE proj_stg (
 	job_title varchar(100),
-	salary int,
-	department_nm varchar(50),
+	education_lvl varchar(50),
 	manager varchar(50),
-	start_dt date,
-	end_dt date,
+	department_nm varchar(50),
+
 	location varchar(50),
 	address varchar(100),
 	city varchar(50),
 	state varchar(2),
-	education_lvl varchar(50)
+
+	hire_dt date,
+	salary int,
+	start_dt date,
+	end_dt date,
+
+	Emp_ID varchar(8),
+	Emp_NM varchar(50),
+	Email varchar(100)
+
 );
 
-insert into
+INSERT INTO
 	proj_stg (
 		Emp_ID,
 		Emp_NM,
@@ -36,7 +40,7 @@ insert into
 		state,
 		education_lvl
 	)
-values
+VALUES
 	(
 		'E17469',
 		'Haifa Hajiri',
@@ -3523,4 +3527,7 @@ values
 		'Masters Degree'
 	);
 
-select * from proj_stg;
+select
+    *
+from
+    proj_stg;
