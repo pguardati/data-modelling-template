@@ -5,17 +5,14 @@ CREATE TABLE proj_stg (
 	education_lvl varchar(50),
 	manager varchar(50),
 	department_nm varchar(50),
-
 	location varchar(50),
 	address varchar(100),
 	city varchar(50),
 	state varchar(2),
-
 	hire_dt date,
 	salary int,
 	start_dt date,
 	end_dt date,
-
 	Emp_ID varchar(8),
 	Emp_NM varchar(50),
 	Email varchar(100)
@@ -3526,8 +3523,3 @@ VALUES
 		'MN',
 		'Masters Degree'
 	);
-
-select
-    *
-from
-    proj_stg;

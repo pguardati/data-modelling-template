@@ -82,6 +82,7 @@ insert into contracts (employee_id, hire_date, start_date, end_date, salary)
 select distinct emp_id, hire_dt, start_dt, end_dt, salary from proj_stg;
 
 -- employees
+insert into employees
 select distinct Emp_ID, Emp_NM, Email, j.job_id, e.title_id, m.manager_id, d.department_id, o.office_id, c.contract_id
 from proj_stg as staging
 join job_titles as j
