@@ -144,7 +144,8 @@ INSERT INTO
         employee_email,
         title_id,
         current_contract_id
-    ) WITH employees_updated AS (
+    )
+    WITH employees_updated AS (
         -- select most recent record of each employee
         SELECT
             *
@@ -191,4 +192,4 @@ SELECT
 FROM
     employees_updated AS staging
     JOIN education_titles AS e ON staging.education_lvl = e.title_name
-    JOIN contracts_updated AS c ON staging.emp_id = c.employee_id
+    JOIN contracts_updated AS c ON staging.emp_id = c.employee_id;
