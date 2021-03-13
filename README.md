@@ -2,7 +2,7 @@
 Template solution of a data modelling problem.
 Developed for the Data Architect Udacity Nanodegree.
 
-The problem is to develop:
+The request is to develop:
 - a business proposal 
 - a physical implementation  
 for a database migration in the context of an HR department
@@ -63,31 +63,12 @@ Critical data:
 - Daily incremental backup
 
 ## ERD (Entity Relationship Diagram) 
-# Conceptual
+### Conceptual
 TODO <-------------------------------------------------------------
-# Logical
+### Logical
 TODO <-------------------------------------------------------------
-# Physical
+### Physical
 TODO <-------------------------------------------------------------
-
-## Implementation
-
-Load the mockup data in the staging table:
-```
-src/StageTableLoad.sql
-```
-
-Create the tables:
-```
-src/ddl.sql
-```
-
-Move data from Staging to 3NF database:
-```
-src/etl.sql
-```
-
-Test queries are available in `src/queries`
 
 Additional notes:
 To forbid a user to access the salary field:
