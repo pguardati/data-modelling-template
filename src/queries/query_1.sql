@@ -34,4 +34,4 @@ SELECT
 FROM
     current_contracts AS c
     JOIN departments AS d ON c.department_id = d.department_id
-    JOIN job_titles AS j ON c.job_id = j.job_id
+    JOIN job_titles AS j ON c.job_id = j.job_id;
