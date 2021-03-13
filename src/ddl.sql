@@ -42,9 +42,16 @@ CREATE TABLE offices (
     state varchar(2)
 );
 
+CREATE TABLE employees (
+    employee_id varchar(8) PRIMARY KEY,
+    employee_name varchar(50),
+    employee_email varchar(100),
+    title_id int REFERENCES education_titles(title_id)
+);
+
 CREATE TABLE contracts (
     contract_id serial PRIMARY KEY,
-    employee_id varchar(50),
+    employee_id varchar(8) REFERENCES employees(employee_id),
     hire_date date,
     start_date date,
     end_date date,
@@ -54,12 +61,3 @@ CREATE TABLE contracts (
     department_id int REFERENCES departments(department_id),
     office_id int REFERENCES offices(office_id)
 );
-
-CREATE TABLE employees (
-    employee_id varchar(8) PRIMARY KEY,
-    employee_name varchar(50),
-    employee_email varchar(100),
-    title_id int REFERENCES education_titles(title_id),
-    current_contract_id int REFERENCES contracts(contract_id)
-);
-
