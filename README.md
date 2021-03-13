@@ -64,13 +64,13 @@ through the `employee_id` field
 
 ## ERD (Entity Relationship Diagram) 
 ### Conceptual
-TODO <-------------------------------------------------------------
+![Conceptual ERD](doc/erd/ERD_Conceptual.png)
 ### Logical
-TODO <-------------------------------------------------------------
+![Logical ERD](doc/erd/ERD_Logical.png)
 ### Physical
-TODO <-------------------------------------------------------------
+![Physical ERD](doc/erd/ERD_Physical.png)
 
-Additional notes:
+## Additional notes:  
 To forbid a user to access the salary field:
 - restrict access on `contracts` table
 - grant access to all fields but `salary`
@@ -90,4 +90,5 @@ grant SELECT (
 ) on contracts to user;
 ```
 
-To run the scripts refer to [Usage.md](doc/Usage.md)
+## Usage
+To run the sql scripts refer to [Usage.md](doc/Usage.md)
