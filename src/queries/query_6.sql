@@ -1,5 +1,5 @@
 -- Q6 - Current and past job of Toni Lembeck
-    WITH explicit_contracts AS (
+WITH explicit_contracts AS (
         SELECT
             employee_id,
             job_name,

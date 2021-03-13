@@ -2,7 +2,7 @@
 Template solution of a data modelling problem.
 Developed for the Data Architect Udacity Nanodegree.
 
-The problem is to develop:
+The request is to develop:
 - a business proposal 
 - a physical implementation  
 for a database migration in the context of an HR department
@@ -13,7 +13,7 @@ Migrate data from a flat excel file to a postgres database
 ### Current Solution
 Data are stored in an excel file
 ### Current data available
-206 rows
+206 rows, one for each contract signed by the company
 ### Additional requests
 - optimized for writing
 - possibility to query
@@ -29,7 +29,7 @@ max 250 rows
 ### Estimated Growth
 max 1000 rows per year
 ### Sensitive Data
-salary, restricted for administrators
+salary, accessible only to administrators
 
 ## Technical Report
 ### Technical motivation
@@ -46,48 +46,29 @@ salary, restricted for administrators
 ### Data ingestion
 ETL (file to postgres)
 ### Data governance
-- Ownership: HR Managment
+- Ownership: HR Management
 - User Access: Public
 ### Scalability
 Negligible 
 ### Flexibility
-Attendance and Time-off could be 
-implemented as bi-columnar tables (day,employee_id)
-an be synced through employee_id with the employee database
+Attendance and Time-off from calendar could be 
+implemented as bi-columnar tables (day,employee_id).
+They could be merged with the `employees` table
+through the `employee_id` field
 ### Storage and Retention
 - Storage: on disk, < 1Gb
 - Retention:: 7 years
 ### Backup
-Critical data:
 - Weekly full backup
 - Daily incremental backup
 
 ## ERD (Entity Relationship Diagram) 
-# Conceptual
+### Conceptual
 TODO <-------------------------------------------------------------
-# Logical
+### Logical
 TODO <-------------------------------------------------------------
-# Physical
+### Physical
 TODO <-------------------------------------------------------------
-
-## Implementation
-
-Load the mockup data in the staging table:
-```
-src/StageTableLoad.sql
-```
-
-Create the tables:
-```
-src/ddl.sql
-```
-
-Move data from Staging to 3NF database:
-```
-src/etl.sql
-```
-
-Test queries are available in `src/queries`
 
 Additional notes:
 To forbid a user to access the salary field:
@@ -108,3 +89,5 @@ grant SELECT (
     office_id
 ) on contracts to user;
 ```
+
+To run the scripts refer to [Usage.md](doc/Usage.md)

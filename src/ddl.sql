@@ -62,3 +62,4 @@ CREATE TABLE employees (
     title_id int REFERENCES education_titles(title_id),
     current_contract_id int REFERENCES contracts(contract_id)
 );
+
