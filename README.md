@@ -9,7 +9,8 @@ for a database migration in the context of an HR department
 
 ## Business Report
 ### Purpose
-Migrate data from a flat excel file to a postgres database
+HR data are increasing.
+Hence the company wants to ensure security and integrity of the stored data.
 ### Current Solution
 Data are stored in an excel file
 ### Current data available
@@ -24,17 +25,26 @@ Data are stored in an excel file
 - HR
 ### Accessibility
 - Public (except for salary)
-### Estimated Size
-max 250 rows
 ### Estimated Growth
-max 1000 rows per year
+Estimated yearly growth = 0.2%  
+### Estimated Size
+Minimum Duration of storage = 7 years
+Expected minimum dimension = initial number of employees * (1 + yearly growth)^(number of years) = 
+200*(1+20%)^7=700
+Hence, a database of maximum 1500 rows is expected to be sufficient.
 ### Sensitive Data
-salary, accessible only to administrators
+salary, accessible only to HR and Management
 
 ## Technical Report
 ### Technical motivation
-- Integrity (duplicates)
-- Security (Privacy)
+An increment in the size of data, as the one experienced by the HR department,
+requires methods to :
+- guarantee the access to multiple users
+- maintain the integrity of the data
+- enforce access restrictions to certain data
+A SQL database as postgres could be a solution since:
+- operations in an SQL database are treated as ACID transactions
+- role based access is provided
 ### Database objects
 - education_titles
 - job_titles
@@ -49,11 +59,15 @@ ETL (file to postgres)
 - Ownership: HR Management
 - User Access: Public
 ### Scalability
-Negligible 
+The database allows the retrieval of data through queries.
+Data are guaranteed to maintain integrity - thanks to ACID transactions - 
+despite multiple users perform read and write operations.
 ### Flexibility
-Attendance and Time-off from calendar could be 
-implemented as bi-columnar tables (day,employee_id).
-They could be merged with the `employees` table
+Data are stored in a Snowflake model.
+New fields can be added to the fact table without the need of updating the existing queries.
+In fact, for instance, Attendance and Time-off from the company calendar could be 
+implemented as tables with two columns (day, employee_id) and
+they could be merged with the `employees` table
 through the `employee_id` field
 ### Storage and Retention
 - Storage: on disk, < 1Gb
