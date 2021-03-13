@@ -41,6 +41,41 @@ SELECT
 FROM
     proj_stg;
 
+-- employees
+INSERT INTO
+    employees (
+        employee_id,
+        employee_name,
+        employee_email,
+        title_id
+    ) WITH employees_updated AS (
+        -- select most recent record of each employee
+        SELECT
+            *
+        FROM
+            (
+                SELECT
+                    *,
+                    row_number() over (
+                        PARTITION by emp_id
+                        ORDER BY
+                            start_dt DESC
+                    ) AS contract_number
+                FROM
+                    proj_stg
+            ) AS staging
+        WHERE
+            contract_number = 1
+    )
+SELECT
+    DISTINCT Emp_ID,
+    Emp_NM,
+    Email,
+    e.title_id
+FROM
+    employees_updated AS staging
+    JOIN education_titles AS e ON staging.education_lvl = e.title_name;
+
 -- contracts
 INSERT INTO
     contracts (
@@ -66,65 +101,8 @@ SELECT
     o.office_id
 FROM
     proj_stg AS staging
+    JOIN employees AS e ON staging.emp_id = e.employee_id
     JOIN job_titles AS j ON staging.job_title = j.job_name
     JOIN managers AS m ON staging.manager = m.manager_name
     JOIN departments AS d ON staging.department_nm = d.department_name
     JOIN offices AS o ON staging."location" = o.office_name;
-
--- employees
-INSERT INTO
-    employees (
-        employee_id,
-        employee_name,
-        employee_email,
-        title_id,
-        current_contract_id
-    )
-    WITH employees_updated AS (
-        -- select most recent record of each employee
-        SELECT
-            *
-        FROM
-            (
-                SELECT
-                    *,
-                    row_number() over (
-                        PARTITION by emp_id
-                        ORDER BY
-                            start_dt DESC
-                    ) AS contract_number
-                FROM
-                    proj_stg
-            ) AS staging
-        WHERE
-            contract_number = 1
-    ),
-    contracts_updated AS (
-        -- select most recent contract of each employee
-        SELECT
-            *
-        FROM
-            (
-                SELECT
-                    *,
-                    row_number() over (
-                        PARTITION by employee_id
-                        ORDER BY
-                            start_date DESC
-                    ) AS contract_number
-                FROM
-                    contracts
-            ) AS staging
-        WHERE
-            contract_number = 1
-    )
-SELECT
-    DISTINCT Emp_ID,
-    Emp_NM,
-    Email,
-    e.title_id,
-    c.contract_id AS current_contract_id
-FROM
-    employees_updated AS staging
-    JOIN education_titles AS e ON staging.education_lvl = e.title_name
-    JOIN contracts_updated AS c ON staging.emp_id = c.employee_id;
